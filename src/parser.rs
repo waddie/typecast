@@ -181,9 +181,55 @@ fn parse_modifier_combo(spec: &str) -> String {
         }
     }
 
+    // First, resolve the base key to its escape sequence
+    let base_key = match key {
+        // Special keys that resolve to their escape sequences
+        "esc" => "\x1b",
+        "space" => " ",
+        "ret" | "return" | "enter" => "\r",
+        "tab" => "\t",
+        "backspace" | "bs" => "\x7f",
+
+        // Function keys
+        "F1" => "\x1bOP",
+        "F2" => "\x1bOQ",
+        "F3" => "\x1bOR",
+        "F4" => "\x1bOS",
+        "F5" => "\x1b[15~",
+        "F6" => "\x1b[17~",
+        "F7" => "\x1b[18~",
+        "F8" => "\x1b[19~",
+        "F9" => "\x1b[20~",
+        "F10" => "\x1b[21~",
+        "F11" => "\x1b[23~",
+        "F12" => "\x1b[24~",
+
+        // Arrow keys
+        "up" => "\x1b[A",
+        "down" => "\x1b[B",
+        "right" => "\x1b[C",
+        "left" => "\x1b[D",
+
+        // Home/End/etc
+        "home" => "\x1b[H",
+        "end" => "\x1b[F",
+        "pageup" | "pgup" => "\x1b[5~",
+        "pagedown" | "pgdn" => "\x1b[6~",
+        "insert" | "ins" => "\x1b[2~",
+        "delete" | "del" => "\x1b[3~",
+
+        // Single character key (letter, number, symbol) - leave as-is for modifier processing
+        _ if key.len() == 1 => key,
+
+        // Unknown special key
+        _ => return format!("<{}>", spec),
+    };
+
+    // Now apply modifiers
+
     // Handle Ctrl combinations
     if has_ctrl && !has_alt && !has_shift {
-        // Simple Ctrl-key
+        // For single character keys
         if key.len() == 1 {
             let ch = key.chars().next().unwrap().to_ascii_lowercase();
             if ch.is_ascii_lowercase() {
@@ -199,25 +245,48 @@ fn parse_modifier_combo(spec: &str) -> String {
             } else if ch == '\\' {
                 return "\x1c".to_string(); // Ctrl-\
             }
+        } else {
+            // For special keys with Ctrl
+            match key {
+                "space" => return "\x00".to_string(),
+                // Most other special keys don't have meaningful Ctrl combinations
+                _ => return format!("<{}>", spec),
+            }
         }
     }
 
-    // Handle Alt combinations (prepend ESC)
-    if has_alt && !has_ctrl && key.len() == 1 {
-        return format!("\x1b{}", key);
+    // Handle Alt combinations (prepend ESC to the base key)
+    if has_alt && !has_ctrl {
+        return format!("\x1b{}", base_key);
     }
 
-    // Handle Shift (uppercase)
+    // Handle Shift (uppercase for single character keys)
     if has_shift && !has_ctrl && !has_alt && key.len() == 1 {
         return key.to_uppercase();
     }
 
     // Handle Ctrl-Shift combinations
-    if has_ctrl && has_shift && key.len() == 1 {
+    if has_ctrl && has_shift && !has_alt && key.len() == 1 {
         let ch = key.chars().next().unwrap().to_ascii_uppercase();
         if ch.is_ascii_uppercase() {
             let code = (ch as u8) - b'A' + 1;
             return std::char::from_u32(code as u32).unwrap().to_string();
+        }
+    }
+
+    // Handle Ctrl-Alt combinations
+    if has_ctrl && has_alt {
+        // For single character keys: Ctrl-Alt-key is ESC followed by Ctrl-key
+        if key.len() == 1 {
+            let ch = key.chars().next().unwrap().to_ascii_lowercase();
+            if ch.is_ascii_lowercase() {
+                let code = (ch as u8) - b'a' + 1;
+                return format!("\x1b{}", std::char::from_u32(code as u32).unwrap());
+            }
+        } else {
+            // For special keys: Ctrl-Alt-key is ESC followed by base key
+            // (Ctrl doesn't meaningfully apply to most special keys)
+            return format!("\x1b{}", base_key);
         }
     }
 
@@ -419,5 +488,44 @@ $ ls -la
         assert!(result.is_ok());
         let script = result.unwrap();
         assert_eq!(script.commands.len(), 5);
+    }
+
+    #[test]
+    fn test_parse_alt_with_special_keys() {
+        // Test Alt-Enter
+        let input = "$ <A-ret>";
+        let result = parse_type(input);
+        assert!(result.is_ok());
+        let (_, cmd) = result.unwrap();
+        if let Command::Type(text) = cmd {
+            assert_eq!(text, "\x1b\r"); // ESC + carriage return
+        } else {
+            panic!("Expected Type command");
+        }
+
+        // Test Alt-space
+        let input = "$ <A-space>";
+        let result = parse_type(input);
+        assert!(result.is_ok());
+        let (_, cmd) = result.unwrap();
+        if let Command::Type(text) = cmd {
+            assert_eq!(text, "\x1b "); // ESC + space
+        } else {
+            panic!("Expected Type command");
+        }
+    }
+
+    #[test]
+    fn test_parse_ctrl_with_special_keys() {
+        // Test Ctrl-space
+        let input = "$ <C-space>";
+        let result = parse_type(input);
+        assert!(result.is_ok());
+        let (_, cmd) = result.unwrap();
+        if let Command::Type(text) = cmd {
+            assert_eq!(text, "\x00"); // Ctrl-space
+        } else {
+            panic!("Expected Type command");
+        }
     }
 }
