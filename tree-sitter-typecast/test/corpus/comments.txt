@@ -1,0 +1,82 @@
+==================
+Basic comment
+==================
+
+# This is a comment
+
+---
+
+(source_file
+  (comment
+    (comment_text)))
+
+==================
+Empty comment
+==================
+
+#
+
+---
+
+(source_file
+  (comment))
+
+==================
+Multiple comments
+==================
+
+# First comment
+# Second comment
+# Third comment
+
+---
+
+(source_file
+  (comment
+    (comment_text))
+  (comment
+    (comment_text))
+  (comment
+    (comment_text)))
+
+==================
+Comment with special characters
+==================
+
+# Comment with <special> & symbols! @#$%
+
+---
+
+(source_file
+  (comment
+    (comment_text)))
+
+==================
+Inline comment after directive
+==================
+
+@ speed:0.1  # This is an inline comment
+
+---
+
+(source_file
+  (directive
+    (speed_directive
+      (float))
+    (inline_comment
+      (comment_text))))
+
+==================
+Multiple spaces before inline comment
+==================
+
+@ speed:0.1     # Comment with extra spaces
+
+---
+
+(source_file
+  (directive
+    (speed_directive
+      (float))
+    (inline_comment
+      (comment_text))))

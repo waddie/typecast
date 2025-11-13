@@ -1,0 +1,83 @@
+==================
+Simple text
+==================
+
+$ echo hello
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text))))
+
+==================
+Empty type command
+==================
+
+$
+
+---
+
+(source_file
+  (type_command))
+
+==================
+Type command with spaces
+==================
+
+$   ls -la
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text))))
+
+==================
+Multiple type commands
+==================
+
+$ cd ~/source
+$ ls -la
+$ pwd
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text)))
+  (type_command
+    (type_content
+      (text)))
+  (type_command
+    (type_content
+      (text))))
+
+==================
+Type with quoted string
+==================
+
+$ echo "hello world"
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text))))
+
+==================
+Type with special characters
+==================
+
+$ echo $PATH && echo $HOME
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text))))

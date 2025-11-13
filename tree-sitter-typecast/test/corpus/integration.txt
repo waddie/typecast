@@ -1,0 +1,286 @@
+==================
+Complete script example
+==================
+
+@ speed:0.1
+@ jitter:0.02
+
+# Open editor
+$ hx demo.http<ret>
+@ wait:1.0
+
+# Type command
+$ <space>Hc
+@ wait:2.0
+
+---
+
+(source_file
+  (directive
+    (speed_directive
+      (float)))
+  (directive
+    (jitter_directive
+      (float)))
+  (comment
+    (comment_text))
+  (type_command
+    (type_content
+      (text)
+      (special_key
+        (key_spec))))
+  (directive
+    (wait_directive
+      (float)))
+  (comment
+    (comment_text))
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (text)))
+  (directive
+    (wait_directive
+      (float))))
+
+==================
+Empty lines between commands
+==================
+
+@ speed:0.1
+
+$ echo hello
+
+$ echo world
+
+---
+
+(source_file
+  (directive
+    (speed_directive
+      (float)))
+  (type_command
+    (type_content
+      (text)))
+  (type_command
+    (type_content
+      (text))))
+
+==================
+All directive types
+==================
+
+@ size:80:24
+@ speed:0.1
+@ jitter:0.03
+@ shell:/bin/bash
+@ wait:1.0
+
+---
+
+(source_file
+  (directive
+    (size_directive
+      (integer)
+      (integer)))
+  (directive
+    (speed_directive
+      (float)))
+  (directive
+    (jitter_directive
+      (float)))
+  (directive
+    (shell_directive
+      (shell_path)))
+  (directive
+    (wait_directive
+      (float))))
+
+==================
+Complex type sequence
+==================
+
+$ cd ~/source<ret><A-o><C-c>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text)
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Mixed content with comments
+==================
+
+# Setup
+@ speed:0.1  # Fast typing
+
+# Execute command
+$ echo test<ret>
+
+# Cleanup
+@ wait:1.0  # Wait before exit
+
+---
+
+(source_file
+  (comment
+    (comment_text))
+  (directive
+    (speed_directive
+      (float))
+    (inline_comment
+      (comment_text)))
+  (comment
+    (comment_text))
+  (type_command
+    (type_content
+      (text)
+      (special_key
+        (key_spec))))
+  (comment
+    (comment_text))
+  (directive
+    (wait_directive
+      (float))
+    (inline_comment
+      (comment_text))))
+
+==================
+Helix editor workflow
+==================
+
+$ <space>
+@ wait:0.4
+$ n
+@ wait:0.4
+$ J
+@ wait:0.5
+$ <down>
+@ wait:0.5
+$ <ret>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))))
+  (directive
+    (wait_directive
+      (float)))
+  (type_command
+    (type_content
+      (text)))
+  (directive
+    (wait_directive
+      (float)))
+  (type_command
+    (type_content
+      (text)))
+  (directive
+    (wait_directive
+      (float)))
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))))
+  (directive
+    (wait_directive
+      (float)))
+  (type_command
+    (type_content
+      (special_key
+        (key_spec)))))
+
+==================
+Escaped brackets in context
+==================
+
+$ echo \<not a key\> but <ret> is
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text)
+      (escaped_bracket)
+      (text)
+      (escaped_bracket)
+      (text)
+      (special_key
+        (key_spec))
+      (text))))
+
+==================
+Function key sequence
+==================
+
+$ <F1><F2><F3><F4><F5><F6><F7><F8><F9><F10><F11><F12>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec)))))
+
+==================
+Navigation sequence
+==================
+
+$ <up><up><down><left><right><home><end>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec)))))

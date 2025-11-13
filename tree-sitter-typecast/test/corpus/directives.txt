@@ -1,0 +1,128 @@
+==================
+Speed directive
+==================
+
+@ speed:0.1
+
+---
+
+(source_file
+  (directive
+    (speed_directive
+      (float))))
+
+==================
+Jitter directive
+==================
+
+@ jitter:0.02
+
+---
+
+(source_file
+  (directive
+    (jitter_directive
+      (float))))
+
+==================
+Wait directive
+==================
+
+@ wait:1.5
+
+---
+
+(source_file
+  (directive
+    (wait_directive
+      (float))))
+
+==================
+Shell directive
+==================
+
+@ shell:/bin/bash
+
+---
+
+(source_file
+  (directive
+    (shell_directive
+      (shell_path))))
+
+==================
+Size directive
+==================
+
+@ size:120:40
+
+---
+
+(source_file
+  (directive
+    (size_directive
+      (integer)
+      (integer))))
+
+==================
+Multiple directives
+==================
+
+@ speed:0.1
+@ jitter:0.02
+@ size:80:24
+
+---
+
+(source_file
+  (directive
+    (speed_directive
+      (float)))
+  (directive
+    (jitter_directive
+      (float)))
+  (directive
+    (size_directive
+      (integer)
+      (integer))))
+
+==================
+Directive with spaces
+==================
+
+@   speed:0.1
+
+---
+
+(source_file
+  (directive
+    (speed_directive
+      (float))))
+
+==================
+Directive with inline comment
+==================
+
+@ speed:0.1  # Set typing speed
+
+---
+
+(source_file
+  (directive
+    (speed_directive
+      (float))
+    (inline_comment
+      (comment_text))))
+
+==================
+Shell path with spaces
+==================
+
+@ shell:/usr/local/bin/bash
+
+---
+
+(source_file
+  (directive
+    (shell_directive
+      (shell_path))))

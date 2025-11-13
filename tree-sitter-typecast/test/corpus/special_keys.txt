@@ -1,0 +1,172 @@
+==================
+Basic special keys
+==================
+
+$ <esc><space><tab><backspace>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec)))))
+
+==================
+Return key variants
+==================
+
+$ <ret><return><enter>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec)))))
+
+==================
+Function keys
+==================
+
+$ <F1><F5><F10><F12>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec)))))
+
+==================
+Arrow keys
+==================
+
+$ <up><down><left><right>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec)))))
+
+==================
+Navigation keys
+==================
+
+$ <home><end><pageup><pagedown>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec)))))
+
+==================
+Editing keys
+==================
+
+$ <insert><delete><bs>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec)))))
+
+==================
+Special key with text
+==================
+
+$ echo hello<ret>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text)
+      (special_key
+        (key_spec)))))
+
+==================
+Text between special keys
+==================
+
+$ <ret>echo hello<space>world<ret>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (text)
+      (special_key
+        (key_spec))
+      (text)
+      (special_key
+        (key_spec)))))
+
+==================
+Key aliases
+==================
+
+$ <bs><ins><del><pgup><pgdn>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec)))))

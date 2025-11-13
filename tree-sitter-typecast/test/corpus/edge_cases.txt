@@ -1,0 +1,269 @@
+==================
+Negative float
+==================
+
+@ speed:-0.1
+
+---
+
+(source_file
+  (directive
+    (speed_directive
+      (float))))
+
+==================
+Float without leading digit
+==================
+
+@ speed:.5
+
+---
+
+(source_file
+  (directive
+    (speed_directive
+      (float))))
+
+==================
+Large float
+==================
+
+@ wait:999.999
+
+---
+
+(source_file
+  (directive
+    (wait_directive
+      (float))))
+
+==================
+Very small float
+==================
+
+@ jitter:0.001
+
+---
+
+(source_file
+  (directive
+    (jitter_directive
+      (float))))
+
+==================
+Large terminal size
+==================
+
+@ size:320:200
+
+---
+
+(source_file
+  (directive
+    (size_directive
+      (integer)
+      (integer))))
+
+==================
+Type command with only space
+==================
+
+$ <space>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec)))))
+
+==================
+Consecutive special keys
+==================
+
+$ <ret><ret><ret>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec))
+      (special_key
+        (key_spec)))))
+
+==================
+Shell path with tilde
+==================
+
+@ shell:~/bin/bash
+
+---
+
+(source_file
+  (directive
+    (shell_directive
+      (shell_path))))
+
+==================
+Comment with hash symbols
+==================
+
+# This is a comment # with # hashes #
+
+---
+
+(source_file
+  (comment
+    (comment_text)))
+
+==================
+Type with unicode
+==================
+
+$ echo "こんにちは"
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text))))
+
+==================
+Multiple consecutive escapes
+==================
+
+$ \<\<\>\>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (escaped_bracket)
+      (escaped_bracket)
+      (escaped_bracket)
+      (escaped_bracket))))
+
+==================
+Modifier with uppercase letter
+==================
+
+$ <C-A><C-Z>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Modifier with number
+==================
+
+$ <C-0><A-9>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Complex shell path
+==================
+
+@ shell:/usr/local/Cellar/bash/5.2.15/bin/bash
+
+---
+
+(source_file
+  (directive
+    (shell_directive
+      (shell_path))))
+
+==================
+Long text line
+==================
+
+$ echo "This is a very long line of text that contains many words and characters to test the parser"
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text))))
+
+==================
+Only special keys in type
+==================
+
+$ <C-a><C-e><C-k><C-u>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Mixed case modifiers
+==================
+
+$ <Ctrl-c><ctrl-c><CTRL-c>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Minimum valid script
+==================
+
+$
+
+---
+
+(source_file
+  (type_command))

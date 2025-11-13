@@ -1,0 +1,81 @@
+==================
+Escaped opening bracket
+==================
+
+$ echo \<not a key
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text)
+      (escaped_bracket)
+      (text))))
+
+==================
+Escaped closing bracket
+==================
+
+$ echo not a key\>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text)
+      (escaped_bracket))))
+
+==================
+Both escaped brackets
+==================
+
+$ echo \<not a key\>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text)
+      (escaped_bracket)
+      (text)
+      (escaped_bracket))))
+
+==================
+Escaped brackets with special key
+==================
+
+$ echo \<not\><ret>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text)
+      (escaped_bracket)
+      (text)
+      (escaped_bracket)
+      (special_key
+        (key_spec)))))
+
+==================
+Multiple escaped sequences
+==================
+
+$ \<one\> and \<two\>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (escaped_bracket)
+      (text)
+      (escaped_bracket)
+      (text)
+      (escaped_bracket)
+      (text)
+      (escaped_bracket))))

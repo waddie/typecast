@@ -1,0 +1,249 @@
+==================
+Control modifiers
+==================
+
+$ <C-c><C-d><C-z>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Alt modifiers
+==================
+
+$ <A-x><A-ret><A-space>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Shift modifiers
+==================
+
+$ <S-a><S-b><S-tab>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Meta modifiers
+==================
+
+$ <M-x><M-y>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Lowercase modifiers
+==================
+
+$ <c-c><a-x><s-a><m-x>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Long form modifiers
+==================
+
+$ <Ctrl-c><Alt-x><Shift-a><Meta-x>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Multiple modifiers
+==================
+
+$ <C-S-x><C-A-x><A-S-x>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Control with special keys
+==================
+
+$ <C-space><C-ret><C-tab>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Alt with special keys
+==================
+
+$ <A-ret><A-o>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Control with numbers
+==================
+
+$ <C-1><C-2><C-9>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Control with brackets
+==================
+
+$ <C-[><C-]><C-\>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo)))
+      (special_key
+        (key_spec
+          (modifier_combo))))))
+
+==================
+Modifiers mixed with text
+==================
+
+$ echo<space>hello<C-c>
+
+---
+
+(source_file
+  (type_command
+    (type_content
+      (text)
+      (special_key
+        (key_spec))
+      (text)
+      (special_key
+        (key_spec
+          (modifier_combo))))))
