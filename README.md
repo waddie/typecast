@@ -27,7 +27,7 @@ cargo build --release
 
 Create a script file (`.qp` extension) with your keyboard sequences:
 
-```
+```quipu
 @ speed:0.1
 @ jitter:0.03
 
@@ -59,7 +59,7 @@ quipu --shell /bin/bash script.qp
 
 Or use the shell directive in your script:
 
-```qp
+```quipu
 @ shell:/bin/bash
 $ echo "Running in: $SHELL"<ret>
 ```
@@ -87,7 +87,7 @@ Lines starting with `#` are ignored.
 
 Lines starting with `$` are typed into the terminal:
 
-```
+```quipu
 $ echo "regular text"
 ```
 
